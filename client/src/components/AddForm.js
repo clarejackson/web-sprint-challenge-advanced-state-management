@@ -64,7 +64,7 @@ class AddForm extends React.Component {
     render() {
         return(<section>
             <h2>Add Smurf</h2>
-            <form>
+            <form onSubmit={this.handleSubmit}>
 
                 <div className="form-group">
                     <label htmlFor="name">Name:</label><br/>
@@ -87,7 +87,7 @@ class AddForm extends React.Component {
                 </div>
 
                 <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
-                <button onClick={(e) => this.handleSubmit(e)}>Submit Smurf</button>
+                <button>Submit Smurf</button>
             </form>
         </section>);
     }

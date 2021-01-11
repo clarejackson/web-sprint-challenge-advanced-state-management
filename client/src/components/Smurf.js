@@ -3,9 +3,16 @@ import React from 'react';
 class Smurf extends React.Component {
     render() {
         const { smurf } = this.props;
+        console.log(smurf);
 
-        return(<div data-testid="smurf" className="card">
-        </div>);
+        return(
+            <div data-testid="smurf" className="card">
+                <h1>{smurf.name}</h1>
+                <h2>{smurf.position}</h2>
+                <h3>{smurf.nickname}</h3>
+                <p>{smurf.description}</p>
+            </div>
+                );
     }
 }
 
