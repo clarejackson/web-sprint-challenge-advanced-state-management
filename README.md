@@ -22,10 +22,24 @@ Commit your code regularly and meaningfully. This helps both you (in case you ev
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. You might prepare by writing down your own answers before hand.
 
 1. What problem does the context API help solve?
+
+It solves the problem of having to prop drill to pass data to different levels of a component tree.
+
 2. In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+
+Actions are objects that have a type property. They include any data needed by the reducer to update state. This action is the only way for state to change in Redux. Reducers takes an action and current state to return the new state. The Store holds the state of the application, the “state container”. These three are parts in the Redux  architecture to provide the components with a “predictable state container”.  This is helpful because you can only update state intentionally using actions and it will never be changed any other way. That is why it is known as a single source of truth.
+
 3. What is the difference between Application state and Component state? When would be a good time to use one over the other?
+
+Application state is data that is used throughout the whole application and may be passed around to the components that need it. It can also be updated by multiple components throughout the application. Component state is held locally by the component that is using it. The use of Component state is useful if only that component need access to that state and it will not effect any other components or the application as a whole, such as with a form that is keeping track of each event in its input fields.
+
 4. Describe `redux-thunk`, what does it allow us to do? How does it change our `action-creators`?
+
+Thunk is useful for performing asynchronous operations in a Redux application. It is middleware that is built into Redux for the purposes of helping with things needing to be completed before the actions reach the reducers to update state, such as api calls. It allows us to return functions instead of objects from the action creators. They can handle things like side effects that need to be completed for the reducer to complete the regular actions.
+
 5. What is your favorite state management system you've learned and this sprint? Please explain why!
+
+Context API is so much easier to understand and input in to an application. I am learning to better understand Redux the more errors I have to fix when using it ( and there are a lot of errors). I feel like the steps are clear and I can use more of what I already understand how to code to make it work for the small application I am building at Lambda.
 
 You are expected to be able to answer questions in these areas. Your responses contribute to your Sprint Challenge grade. 
 
