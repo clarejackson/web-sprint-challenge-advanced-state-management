@@ -3,13 +3,12 @@ import { addSmurf, addFormError } from "../actions/"
 import { connect } from "react-redux";
 
 class AddForm extends React.Component {
-    state = {
+        state = {
             name: '',
             position: '',
             nickname: '',
             description: '',
         }
-    
 
     handleChange = (e) => {
         this.setState({ ...this.state, [e.target.name]: e.target.value })
@@ -86,7 +85,7 @@ class AddForm extends React.Component {
                     <input onChange={this.handleChange} name="description" id="description" />
                 </div>
 
-                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
+                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {this.props.error}</div>
                 <button>Submit Smurf</button>
             </form>
         </section>);

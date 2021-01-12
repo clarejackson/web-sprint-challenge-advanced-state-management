@@ -44,6 +44,7 @@ const reducer = (state = initialState, action)=>{
             error: action.payload
            }
            case 'ADD_FORM_ERROR':
+             console.log(action.payload)
            return {
             ...state,
             error: action.payload
