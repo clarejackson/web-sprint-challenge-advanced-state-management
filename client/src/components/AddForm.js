@@ -1,24 +1,108 @@
 import React from 'react';
+import { addSmurf, addFormError } from "../actions/"
+import { connect } from "react-redux";
 
 class AddForm extends React.Component {
+        state = {
+            name: '',
+            position: '',
+            nickname: '',
+            description: '',
+        }
+
+    handleChange = (e) => {
+        this.setState({ ...this.state, [e.target.name]: e.target.value })
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const checkName = this.props.smurfs.filter(smurf => smurf.name === this.state.name);
+        if (checkName.length > 0){
+            this.setState({
+                ...this.state
+            })
+            this.props.addFormError('Error! Smurf name already assigned!');
+            return
+        }
+        if (this.state.name === ''){
+            this.setState({
+                ...this.state
+            })
+            this.props.addFormError('Error! Name must be included!')
+        }
+        else if (this.state.position === ''){
+            this.setState({
+                ...this.state
+            })
+            this.props.addFormError('Error! Position must be included!')
+        } 
+        else if (this.state.nickname === ''){
+            this.setState({
+                ...this.state
+            })
+            this.props.addFormError('Error! Nickname must be included!')
+        }
+        else {
+            const newSmurf = {
+                name: this.state.name,
+                position: this.state.position,
+                nickname: this.state.nickname,
+                description: this.state.description
+            }
+            this.props.addSmurf(newSmurf);
+            this.setState({
+                name: '',
+                position: '',
+                nickname: '',
+                description: '',
+                error: ''
+            })
+        }
+    }
 
     render() {
         return(<section>
             <h2>Add Smurf</h2>
-            <form>
+            <form onSubmit={this.handleSubmit}>
+
                 <div className="form-group">
                     <label htmlFor="name">Name:</label><br/>
                     <input onChange={this.handleChange} name="name" id="name" />
                 </div>
 
-                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
+                <div className="form-group">
+                    <label htmlFor="position">Position:</label><br/>
+                    <input onChange={this.handleChange} name="position" id="position" />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="nickname">Nickname:</label><br/>
+                    <input onChange={this.handleChange} name="nickname" id="nickname" />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="description">Description:</label><br/>
+                    <input onChange={this.handleChange} name="description" id="description" />
+                </div>
+
+                <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {this.props.error}</div>
                 <button>Submit Smurf</button>
             </form>
         </section>);
     }
 }
 
-export default AddForm;
+const mapStateToProps = (state) => {
+    return {
+        smurfs: state.smurfs,
+        isLoading: state.isLoading,
+        error: state.error
+    }
+}
+
+const mapDispatchToProps = { addSmurf, addFormError }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddForm);
 
 //Task List:
 //1. Add in all necessary import components and library methods.
